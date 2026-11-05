@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5d13a83d3de0b7241a8cd6f6fbf106d0
+timeCreated: 1532443920
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 116360
+  packageName: Asobi-chan free
+  packageVersion: 2.1
+  assetPath: Assets/asobi_chan_b/Assets/Texture/yellow/Materials/asobi_eyeball.mat
+  uploadId: 297319

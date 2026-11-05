@@ -4,6 +4,8 @@ public class PlayerMotor : MonoBehaviour
 {
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
+    private Animator characterAnimator;
+    private bool wasMoving;
     private PlayerInputHandler playerInputHandler;
     private Vector3 playerVelocity;
     public float speed = 5f;
@@ -16,6 +18,8 @@ public class PlayerMotor : MonoBehaviour
     {
         playerInputHandler = GetComponent<PlayerInputHandler>();
         controller = GetComponent<CharacterController>();
+        characterAnimator = GetComponentInChildren<Animator>();
+        if (characterAnimator != null) characterAnimator.applyRootMotion = false;
     }
 
     // Update is called once per frame
@@ -28,15 +32,17 @@ public class PlayerMotor : MonoBehaviour
     {
         moveDirection.x = input.x;
         moveDirection.z = input.y;
-        if (playerInputHandler.sprintPressed)
+        bool isMoving = input.sqrMagnitude > 0.001f;
+        bool isSprinting = isMoving && playerInputHandler.sprintPressed;
+        if (characterAnimator != null)
         {
-            speed = 7f;
+            if (isMoving != wasMoving)
+                characterAnimator.Play(isMoving ? "run" : "wait", 0, 0f);
+            characterAnimator.speed = isSprinting ? 1.5f : 1f;
         }
-        else
-        {
-            speed = 5f;
-        }
-        controller.Move(speed * Time.deltaTime * transform.TransformDirection(moveDirection));
+        wasMoving = isMoving;
+        float currentSpeed = isSprinting ? sprintSpeed : speed;
+        controller.Move(currentSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
         playerVelocity.y += gravity * Time.deltaTime;
         if (isGrounded && playerVelocity.y < 0){
             playerVelocity.y = -2f;
