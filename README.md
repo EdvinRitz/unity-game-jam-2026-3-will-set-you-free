@@ -1,4 +1,7 @@
-##Game for Unity Gam Jam 2026##
+# 3 Will Set You Free
 
-###Assets used###
-(Asobi-chan free)[https://assetstore.unity.com/packages/3d/characters/humanoids/humans/asobi-chan-free-116360#reviews]
+A game made for Unity Game Jam 2026. Theme: **Lucky Number**.
+
+## Assets used
+
+- [Asobi-chan free](https://assetstore.unity.com/packages/3d/characters/humanoids/humans/asobi-chan-free-116360)
