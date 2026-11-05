@@ -1,6 +1,7 @@
 # 3 Will Set You Free
 
-A game made for [Unity Game Jam 2026. Theme: **Lucky Number**.](https://itch.io/jam/official-unity-game-jam-2026)
+A game made for [Unity Game Jam 2026.](https://itch.io/jam/official-unity-game-jam-2026)
+Theme: **Lucky Number**.
 
 ## Assets used
 
