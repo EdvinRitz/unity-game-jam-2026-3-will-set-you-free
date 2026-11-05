@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerInputHandeler : MonoBehaviour
+public class PlayerInputHandler : MonoBehaviour
 {
     private InputSystem inputSystem;
     public InputSystem.PlayerActions playerActions;
