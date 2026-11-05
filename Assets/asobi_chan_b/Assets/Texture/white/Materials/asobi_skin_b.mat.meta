@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a73f98da4c8ec5c4baa5b9014515d1d0
+timeCreated: 1532443893
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 116360
+  packageName: Asobi-chan free
+  packageVersion: 2.1
+  assetPath: Assets/asobi_chan_b/Assets/Texture/white/Materials/asobi_skin_b.mat
+  uploadId: 297319
