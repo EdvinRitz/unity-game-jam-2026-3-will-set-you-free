@@ -15,8 +15,7 @@ public class PanelFinder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var hits = Physics.RaycastAll(fPCamera.transform.position, fPCamera.transform.forward);
-        foreach (RaycastHit hit in hits)
+        if(Physics.Raycast(fPCamera.transform.position, fPCamera.transform.forward, out RaycastHit hit, interactionRange))
         {
             if(hit.transform.gameObject.tag.ToString() == "Panel")
             {
@@ -28,8 +27,11 @@ public class PanelFinder : MonoBehaviour
             }
             else
             {
-                 interactionInRange = false;
+                interactionInRange = false;
             }
         }
+        
+
+        
     }
 }
