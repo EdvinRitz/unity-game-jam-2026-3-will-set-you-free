@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PanelFinder : MonoBehaviour
 {
-    public Camera fPCamera;
+    public Camera fpCamera;
     public float interactionRange;
     public bool interactionInRange;
     public GameObject player;
@@ -15,9 +15,7 @@ public class PanelFinder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        interactionInRange = false;
-
-        if(Physics.Raycast(fPCamera.transform.position, fPCamera.transform.forward, out RaycastHit hit, interactionRange))
+        if(Physics.Raycast(fpCamera.transform.position, fpCamera.transform.forward, out RaycastHit hit, interactionRange))
         {
             if(hit.transform.gameObject.tag.ToString() == "Panel")
             {
@@ -27,6 +25,10 @@ public class PanelFinder : MonoBehaviour
                 }
             }
             
+        }
+        else if(!Physics.Raycast(fpCamera.transform.position, fpCamera.transform.forward, interactionRange) || hit.transform.gameObject.tag.ToString() != "Panel")
+        {
+            interactionInRange = false;
         }
     }
 }
