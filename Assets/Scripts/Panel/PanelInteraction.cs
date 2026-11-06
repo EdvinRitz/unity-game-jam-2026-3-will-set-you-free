@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PanelInteraction : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PanelInteraction : MonoBehaviour
     public PanelFinder panelFinder;
     public PlayerInputHandler playerInputHandler;
     public bool panelEntered = false;
+    public GameObject button1;
+    private readonly int buttonLayerNumber = 6;
 
     void Start()
     {
@@ -27,8 +30,22 @@ public class PanelInteraction : MonoBehaviour
             {
                 ExitPanel();
             }
-            Debug.Log("interact pressed");
             playerInputHandler.interactPressed = false;
+        }
+
+        if (playerInputHandler.clickPressed)
+        {
+            if (panelEntered)
+            {
+                Debug.Log("clicked");
+                var ray = ShootClickRay();
+                Physics.Raycast(ray, out RaycastHit hit);
+                if (hit.transform.gameObject.layer == buttonLayerNumber)
+                {
+                    Debug.Log("Button");
+                }
+
+            }
         }
     }
 
@@ -54,5 +71,11 @@ public class PanelInteraction : MonoBehaviour
         Cursor.visible = false;
         playerInputHandler.isUsingPanel = false;
         panelEntered = false;
+    }
+
+    private Ray ShootClickRay()
+    {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        return fpCamera.ScreenPointToRay(mousePosition);
     }
 }

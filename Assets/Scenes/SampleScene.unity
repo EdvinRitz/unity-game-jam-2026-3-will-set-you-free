@@ -397,6 +397,7 @@ MonoBehaviour:
   panelFinder: {fileID: 756787689}
   playerInputHandler: {fileID: 756787688}
   panelEntered: 0
+  button1: {fileID: 0}
 --- !u!1 &313757987
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
   sprintPressed: 0
   interactPressed: 0
+  clickPressed: 0
   isUsingPanel: 0
 --- !u!114 &756787689
 MonoBehaviour:
@@ -966,8 +968,8 @@ GameObject:
   - component: {fileID: 809966115}
   - component: {fileID: 809966114}
   - component: {fileID: 809966113}
-  m_Layer: 0
-  m_Name: Botton
+  m_Layer: 6
+  m_Name: Button
   m_TagString: Panel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
