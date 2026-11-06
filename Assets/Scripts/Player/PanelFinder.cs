@@ -24,6 +24,10 @@ public class PanelFinder : MonoBehaviour
                     interactionInRange = true;
                 }
             }
+            else
+            {
+                interactionInRange = false;
+            }
             
         }
         else if(!Physics.Raycast(fpCamera.transform.position, fpCamera.transform.forward, interactionRange) || hit.transform.gameObject.tag.ToString() != "Panel")
