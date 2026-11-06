@@ -15,6 +15,8 @@ public class PanelFinder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        interactionInRange = false;
+
         if(Physics.Raycast(fPCamera.transform.position, fPCamera.transform.forward, out RaycastHit hit, interactionRange))
         {
             if(hit.transform.gameObject.tag.ToString() == "Panel")
@@ -22,16 +24,9 @@ public class PanelFinder : MonoBehaviour
                 if(Vector3.Distance(player.transform.position, hit.transform.position) <= interactionRange)
                 {
                     interactionInRange = true;
-                    Debug.Log("In range");
                 }
             }
-            else
-            {
-                interactionInRange = false;
-            }
+            
         }
-        
-
-        
     }
 }

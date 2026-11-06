@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelFinder
   fPCamera: {fileID: 894940931}
-  interactionRange: 20
+  interactionRange: 2
   interactionInRange: 0
   player: {fileID: 756787680}
 --- !u!1 &809966112
