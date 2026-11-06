@@ -16,11 +16,14 @@ public class PlayerUI : MonoBehaviour
     {
         if (panelFinder.interactionInRange)
         {
-            interactText.enabled = true;
+            interactText.text = "Press E to interact";
         }
         else
         {
-            interactText.enabled = false;
+            interactText.text = "";
         }
+            
+
+            
     }
 }

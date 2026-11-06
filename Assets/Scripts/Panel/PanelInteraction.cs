@@ -5,6 +5,7 @@ public class PanelInteraction : MonoBehaviour
     public GameObject cameraPoint;
     public GameObject resetPoint;
     public GameObject player;
+    public Camera fpCamera;
     public PanelFinder panelFinder;
     public PlayerInputHandler playerInputHandler;
     public bool panelEntered = false;
@@ -37,6 +38,7 @@ public class PanelInteraction : MonoBehaviour
         playerInputHandler.isUsingPanel = true;
         player.transform.position = cameraPoint.transform.position;
         player.transform.rotation = cameraPoint.transform.rotation;
+        fpCamera.transform.rotation = cameraPoint.transform.rotation;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         panelEntered = true;
@@ -47,6 +49,7 @@ public class PanelInteraction : MonoBehaviour
         Debug.Log("Panel Exited");  
         player.transform.position = resetPoint.transform.position;
         player.transform.rotation = resetPoint.transform.rotation;
+        fpCamera.transform.rotation = resetPoint.transform.rotation;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerInputHandler.isUsingPanel = false;
