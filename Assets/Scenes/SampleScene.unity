@@ -407,6 +407,7 @@ GameObject:
   - component: {fileID: 756787688}
   - component: {fileID: 756787687}
   - component: {fileID: 756787686}
+  - component: {fileID: 756787689}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -578,6 +579,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
   sprintPressed: 0
+--- !u!114 &756787689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756787680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c99970f3c5420b4180ab413c7bcbf8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelFinder
+  fPCamera: {fileID: 894940931}
+  interactionRange: 20
+  interactionInRange: 0
+  player: {fileID: 756787680}
 --- !u!1 &809966112
 GameObject:
   m_ObjectHideFlags: 0
