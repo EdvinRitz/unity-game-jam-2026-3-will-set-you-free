@@ -11,27 +11,31 @@ public class PanelInteraction : MonoBehaviour
     public PlayerInputHandler playerInputHandler;
     public bool panelEntered = false;
     public GameObject button1;
-    private readonly int buttonLayerNumber = 6;
+    private readonly int timerButtonLayerNumber = 6;
+    private readonly int dragButtonLayerNumber = 7;
+    private readonly int changeButtonLayerNumber = 8;
 
-    void Start()
+    void Awake()
     {
-        
+        cameraPoint = transform.Find("Camera Point").gameObject;
+        resetPoint = transform.Find("Reset Point").gameObject;
+        button1 = transform.Find("Button").gameObject;
     }
     // Update is called once per frame
     void Update()
     {
-        if (playerInputHandler.interactPressed)
-        {
-            if(panelFinder.interactionInRange && !panelEntered)
-            {
-                EnterPanel();
-            }
-            else if (panelEntered)
-            {
-                ExitPanel();
-            }
-            playerInputHandler.interactPressed = false;
-        }
+        //if (playerInputHandler.interactPressed)
+        //{
+          //  if(panelFinder.interactionInRange && !panelEntered)
+          //  {
+           //     EnterPanel();
+        //    }
+           // else if (panelEntered)
+            //{
+                //ExitPanel();
+            //}
+            //playerInputHandler.interactPressed = false;
+        //}
 
         if (playerInputHandler.clickPressed)
         {
@@ -40,16 +44,20 @@ public class PanelInteraction : MonoBehaviour
                 Debug.Log("clicked");
                 var ray = ShootClickRay();
                 Physics.Raycast(ray, out RaycastHit hit);
-                if (hit.transform.gameObject.layer == buttonLayerNumber)
+                if (hit.transform.gameObject.layer == timerButtonLayerNumber)
                 {
-                    Debug.Log("Button");
+                    Debug.Log("Timer Button");
+                }
+                else if(hit.transform.gameObject.layer == dragButtonLayerNumber)
+                {
+                    Debug.Log("Drag Button");
                 }
 
             }
         }
     }
 
-    private void EnterPanel()
+    public void EnterPanel()
     {
         Debug.Log("Panel Entered");
         playerInputHandler.isUsingPanel = true;
@@ -61,7 +69,7 @@ public class PanelInteraction : MonoBehaviour
         panelEntered = true;
     }
 
-    private void ExitPanel()
+    public void ExitPanel()
     {
         Debug.Log("Panel Exited");  
         player.transform.position = resetPoint.transform.position;
