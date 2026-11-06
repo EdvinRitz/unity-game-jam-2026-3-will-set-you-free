@@ -19,6 +19,10 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerInputHandler.isUsingPanel)
+        {
+            return;
+        }
         ProcessLook(playerInputHandler.LookInput);
     }
 

@@ -25,6 +25,10 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerInputHandler.isUsingPanel)
+        {
+            return;
+        }
         ProcessMove(playerInputHandler.MoveInput);
     }
 

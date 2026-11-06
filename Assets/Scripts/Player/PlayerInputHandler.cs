@@ -5,8 +5,10 @@ public class PlayerInputHandler : MonoBehaviour
     private InputSystem inputSystem;
     public InputSystem.PlayerActions playerActions;
     public bool sprintPressed;
+    public bool interactPressed;
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
+    public bool isUsingPanel = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Awake()
     {
@@ -24,13 +26,20 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnEnable()
     {
         playerActions.Enable();
+
+        playerActions.Interact.performed += ctx => interactPressed = true;
+
         playerActions.Sprint.performed += ctx => sprintPressed = true;
         playerActions.Sprint.canceled += ctx => sprintPressed = false;
     }
 
     private void ResetInput()
     {
+        interactPressed = false;
         sprintPressed = false;
+
+        MoveInput = Vector2.zero;
+        LookInput = Vector2.zero;
     }
 
     private void OnDisable()
