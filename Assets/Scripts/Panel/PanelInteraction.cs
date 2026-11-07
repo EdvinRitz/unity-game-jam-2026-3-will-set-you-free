@@ -10,51 +10,73 @@ public class PanelInteraction : MonoBehaviour
     public PanelFinder panelFinder;
     public PlayerInputHandler playerInputHandler;
     public bool panelEntered = false;
-    public GameObject button1;
+
     private readonly int timerButtonLayerNumber = 6;
     private readonly int dragButtonLayerNumber = 7;
-    private readonly int changeButtonLayerNumber = 8;
+    private Rigidbody draggedButton;
+    private Vector3 target;
+    private const float DragSpeed = 10f;
 
     void Awake()
     {
         cameraPoint = transform.Find("Camera Point").gameObject;
         resetPoint = transform.Find("Reset Point").gameObject;
-        button1 = transform.Find("Button").gameObject;
     }
-    // Update is called once per frame
+
     void Update()
     {
-        //if (playerInputHandler.interactPressed)
-        //{
-          //  if(panelFinder.interactionInRange && !panelEntered)
-          //  {
-           //     EnterPanel();
-        //    }
-           // else if (panelEntered)
-            //{
-                //ExitPanel();
-            //}
-            //playerInputHandler.interactPressed = false;
-        //}
+        if (!panelEntered)
+            return;
 
-        if (playerInputHandler.clickPressed)
+        var click = playerInputHandler.playerActions.Click;
+
+        // Select a button only on a fresh press, never during the rest of a hold.
+        if (click.WasPressedThisFrame() && Physics.Raycast(ShootClickRay(), out RaycastHit hit))
         {
-            if (panelEntered)
+            if (hit.collider.gameObject.layer == timerButtonLayerNumber)
             {
-                Debug.Log("clicked");
-                var ray = ShootClickRay();
-                Physics.Raycast(ray, out RaycastHit hit);
-                if (hit.transform.gameObject.layer == timerButtonLayerNumber)
-                {
-                    Debug.Log("Timer Button");
-                }
-                else if(hit.transform.gameObject.layer == dragButtonLayerNumber)
-                {
-                    Debug.Log("Drag Button");
-                }
-
+                Debug.Log("Timer Button");
+            }
+            else if (hit.collider.gameObject.layer == dragButtonLayerNumber)
+            {
+                draggedButton = hit.rigidbody;
+                if (draggedButton != null)
+                    target = draggedButton.position;
             }
         }
+
+        if (!click.IsPressed())
+        {
+            ReleaseDrag();
+            return;
+        }
+
+        if (draggedButton != null)
+        {
+            Plane dragPlane = new Plane(Vector3.up, draggedButton.position);
+            Ray dragRay = ShootClickRay();
+            if (dragPlane.Raycast(dragRay, out float distance))
+                target = dragRay.GetPoint(distance);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (draggedButton == null)
+            return;
+
+        Vector3 difference = target - draggedButton.position;
+        difference.y = 0f;
+        draggedButton.linearVelocity = Vector3.ClampMagnitude(difference * DragSpeed, DragSpeed);
+    }
+
+    private void ReleaseDrag()
+    {
+        if (draggedButton == null)
+            return;
+
+        draggedButton.linearVelocity = Vector3.zero;
+        draggedButton = null;
     }
 
     public void EnterPanel()
@@ -71,7 +93,8 @@ public class PanelInteraction : MonoBehaviour
 
     public void ExitPanel()
     {
-        Debug.Log("Panel Exited");  
+        ReleaseDrag();
+        Debug.Log("Panel Exited");
         player.transform.position = resetPoint.transform.position;
         player.transform.rotation = resetPoint.transform.rotation;
         fpCamera.transform.rotation = resetPoint.transform.rotation;
